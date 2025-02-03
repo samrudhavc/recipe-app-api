@@ -1,6 +1,9 @@
 version: "3.11"
 services:
   app:
+    image: myapp
+    environment:
+      - MY_VAR=${recipe-app-api}
     build:
       context: .
       args:
