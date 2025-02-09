@@ -1,6 +1,7 @@
 name: Checks
 
-on: [push]
+on:
+  pull_request:  # Trigger on pull request events
 
 jobs:
   test-lint:
@@ -34,7 +35,7 @@ jobs:
 
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v4  # Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: path/to/test/results
@@ -44,7 +45,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            github.issues.createComment({
+            github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
